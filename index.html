@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petition RTG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Unterstütze unsere Petition!</h1>
+        <p>Diese Petition ist für eine Änderung der neuen Handyreglung für die Oberstufe am Ruhrtal-Gymnasium Schwerte. Unterschreibe jetzt!</p>
+        <button id="unterschreibenButton">Unterschreiben</button>
+        
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" id="closePopup">&times;</span>
+                <h2>Unterschreiben</h2>
+                <input type="text" id="vorname" placeholder="Vorname">
+                <input type="text" id="nachname" placeholder="Nachname">
+                <label for="jahrgang" id="jahrgangLabel">Jahrgang:</label>
+                <select id="jahrgang" name="jahrgang">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="EF">EF</option>
+                    <option value="Q2">Q2</option>
+                </select>
+                <br> <br>
+                <button id="submitButton">Bestätigen</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
