@@ -1,7 +1,7 @@
 // Funktion zum Setzen eines Cookies
 function setCookie(name, value, days) {
     var d = new Date();
-    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000)); // Tage in Millisekunden
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000)); 
     var expires = "expires=" + d.toUTCString();
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
@@ -24,11 +24,11 @@ document.getElementById("unterschreibenButton").addEventListener("click", functi
         alert('Du hast bereits unterschrieben!');
         return;  // Verhindert, dass das Popup angezeigt wird
     }
-    document.getElementById("popup").classList.add('show');  // Popup anzeigen mit Animation
+    document.getElementById("popup").classList.add('show'); 
 });
 
 document.getElementById("closePopup").addEventListener("click", function() {
-    document.getElementById("popup").classList.remove('show');  // Popup schließen mit Animation
+    document.getElementById("popup").classList.remove('show'); 
 });
 
 document.getElementById("submitButton").addEventListener("click", function() {
@@ -38,7 +38,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
     var jahrgang = document.getElementById("jahrgang").value;
 
     // Sende die Daten an das Backend (Flask)
-    fetch('http://127.0.0.1:5000/unterschreiben', {  // Ändere die URL hier
+    fetch('http://10.223.37.200:5000/unterschreiben', {  // Ändere die URL hier
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
