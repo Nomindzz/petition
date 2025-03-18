@@ -38,7 +38,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
     var jahrgang = document.getElementById("jahrgang").value;
 
     // Sende die Daten an das Backend (Flask)
-    fetch('http://10.223.37.200:5000/unterschreiben', {  // Ändere die URL hier
+    fetch('https://petitionbackend.onrender.com/unterschreiben', {  
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
