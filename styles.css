@@ -81,53 +81,53 @@ button:hover {
 }
 
 #jahrgangLabel {
-    color: #333; /* Sehr dunkles Grau für den Text */
-    font-family: 'Arial', sans-serif; /* Eine klare, moderne Schriftart */
-    font-size: 14px; /* Moderate Schriftgröße */
-    margin-bottom: 8px; /* Kleiner Abstand unter dem Label */
-    display: block; /* Label als Block-Element für besseren Abstand */
+    color: #333; 
+    font-family: 'Arial', sans-serif; 
+    font-size: 14px; 
+    margin-bottom: 8px; 
+    display: block;
 }
 
 
 @media (max-width: 768px) {
     body {
-        font-size: 14px;  /* Schriftgröße ein wenig verkleinern */
+        font-size: 14px;  
     }
 
     .container {
-        width: 90%;  /* Container-Breite anpassen */
-        padding: 15px;  /* Weniger Padding für kleinere Bildschirme */
+        width: 90%; 
+        padding: 15px;  
     }
 
     h1 {
-        font-size: 20px;  /* Kleinere Schriftgröße für den Titel */
+        font-size: 20px; 
     }
 
     p {
-        font-size: 14px;  /* Kleinere Schriftgröße für den Text */
+        font-size: 14px;  
     }
 
     button {
-        font-size: 14px;  /* Kleinere Schriftgröße für den Button */
-        padding: 8px 16px;  /* Weniger Padding für den Button */
+        font-size: 14px; 
+        padding: 8px 16px; 
     }
 
     .popup {
-        width: 80%;  /* Popup-Breite verringern */
-        padding: 15px;  /* Weniger Padding im Popup */
-        transform: translate(-50%, -50%) scale(0.9);  /* Popup etwas kleiner */
+        width: 80%;  
+        padding: 15px;  
+        transform: translate(-50%, -50%) scale(0.9);  
     }
 
     .popup-content input {
-        padding: 6px;  /* Weniger Padding für die Eingabefelder */
-        font-size: 14px;  /* Kleinere Schriftgröße in den Eingabefeldern */
+        padding: 6px; 
+        font-size: 14px; 
     }
 
     #jahrgangLabel {
-        font-size: 12px;  /* Kleinere Schriftgröße für das Label */
+        font-size: 12px;  
     }
 
     .close {
-        font-size: 18px;  /* Kleinere Schriftgröße für das Schließen-Symbol */
+        font-size: 18px;  
     }
 }
