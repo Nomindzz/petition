@@ -19,22 +19,61 @@ function getCookie(name) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("unterschreibenButton").addEventListener("click", function() {
+    // Sicherstellen, dass alle Elemente existieren
+    const unterschreibenButton = document.getElementById("unterschreibenButton");
+    const popup = document.getElementById("popup");
+    const closePopup = document.getElementById("closePopup");
+    const submitButton = document.getElementById("submitButton");
+
+    if (!unterschreibenButton || !popup || !closePopup || !submitButton) {
+        console.error("Ein oder mehrere Elemente wurden nicht gefunden!");
+        return;
+    }
+
+    // Funktion zum Setzen eines Cookies
+    function setCookie(name, value, days) {
+        var d = new Date();
+        d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000)); 
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Funktion zum Abrufen eines Cookies
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    // Unterschreiben-Button
+    unterschreibenButton.addEventListener("click", function() {
         if (getCookie('hasSigned') === 'true') {
             alert('Du hast bereits unterschrieben!');
             return;
         }
-        document.getElementById("popup").classList.add('show'); 
+        console.log("Popup wird angezeigt");  // Debugging
+        popup.classList.add('show');
     });
 
-    document.getElementById("closePopup").addEventListener("click", function() {
-        document.getElementById("popup").classList.remove('show'); 
+    // Schließen-Button
+    closePopup.addEventListener("click", function() {
+        popup.classList.remove('show');
     });
 
-    document.getElementById("submitButton").addEventListener("click", function() {
+    // Absenden-Button
+    submitButton.addEventListener("click", function() {
         var vorname = document.getElementById("vorname").value;
         var nachname = document.getElementById("nachname").value;
         var jahrgang = document.getElementById("jahrgang").value;
+
+        if (!vorname || !nachname || !jahrgang) {
+            alert("Bitte alle Felder ausfüllen!");
+            return;
+        }
 
         fetch('https://schimmeltuerken.pythonanywhere.com/unterschreiben', {  
             method: 'POST',
@@ -49,63 +88,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert('Danke für deine Unterschrift!');
                 setCookie('hasSigned', 'true', 365);
             }
-            document.getElementById("popup").classList.remove('show');
+            popup.classList.remove('show');
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Fehler:', error);
             alert('Etwas ist schiefgegangen! Stelle sicher, dass du online bist.');
         });
     });
 });
-
-
-document.getElementById("unterschreibenButton").addEventListener("click", function() {
-    // Überprüfe, ob der Benutzer bereits unterschrieben hat
-    if (getCookie('hasSigned') === 'true') {
-        alert('Du hast bereits unterschrieben!');
-        return;  // Verhindert, dass das Popup angezeigt wird
-    }
-    document.getElementById("popup").classList.add('show'); 
-});
-
-document.getElementById("closePopup").addEventListener("click", function() {
-    document.getElementById("popup").classList.remove('show'); 
-});
-
-document.getElementById("submitButton").addEventListener("click", function() {
-    // Hole die Werte aus den Input-Feldern
-    var vorname = document.getElementById("vorname").value;
-    var nachname = document.getElementById("nachname").value;
-    var jahrgang = document.getElementById("jahrgang").value;
-
-    // Sende die Daten an das Backend (Flask)
-    fetch('https://schimmeltuerken.pythonanywhere.com/unterschreiben', {  
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            vorname: vorname,
-            nachname: nachname,
-            jahrgang: jahrgang
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Überprüfen, ob die Antwort den Status "error" enthält
-        if (data.status === 'error') {
-            alert(data.message);  // Zeigt eine Nachricht an, falls der Benutzer bereits unterschrieben hat
-        } else {
-            alert('Danke für deine Unterschrift!');  // Bestätigung, wenn die Unterschrift erfolgreich gespeichert wurde
-            setCookie('hasSigned', 'true', 365);  // Setzt den Cookie, dass der Benutzer unterschrieben hat
-        }
-        document.getElementById("popup").classList.remove('show'); // Popup schließen mit Animation
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Etwas ist schiefgegangen! Stelle sicher, dass du online bist.');
-    });
-
-    });
-});
-
