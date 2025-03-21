@@ -38,7 +38,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
     var jahrgang = document.getElementById("jahrgang").value;
 
     // Sende die Daten an das Backend (Flask)
-    fetch('https://petitionbackend.onrender.com/unterschreiben', {  
+    fetch('https://schimmeltuerken.pythonanywhere.com/', {  
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
