@@ -38,7 +38,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
     var jahrgang = document.getElementById("jahrgang").value;
 
     // Sende die Daten an das Backend (Flask)
-    fetch('https://schimmeltuerken.pythonanywhere.com/', {  
+    fetch('https://schimmeltuerken.pythonanywhere.com/unterschreiben', {  
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -62,7 +62,9 @@ document.getElementById("submitButton").addEventListener("click", function() {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Etwas ist schiefgegangen!');
+        alert('Etwas ist schiefgegangen! Stelle sicher, dass du online bist.');
+    });
+
     });
 });
 
