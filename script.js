@@ -18,6 +18,47 @@ function getCookie(name) {
     return null;
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("unterschreibenButton").addEventListener("click", function() {
+        if (getCookie('hasSigned') === 'true') {
+            alert('Du hast bereits unterschrieben!');
+            return;
+        }
+        document.getElementById("popup").classList.add('show'); 
+    });
+
+    document.getElementById("closePopup").addEventListener("click", function() {
+        document.getElementById("popup").classList.remove('show'); 
+    });
+
+    document.getElementById("submitButton").addEventListener("click", function() {
+        var vorname = document.getElementById("vorname").value;
+        var nachname = document.getElementById("nachname").value;
+        var jahrgang = document.getElementById("jahrgang").value;
+
+        fetch('https://schimmeltuerken.pythonanywhere.com/unterschreiben', {  
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ vorname, nachname, jahrgang })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'error') {
+                alert(data.message);
+            } else {
+                alert('Danke für deine Unterschrift!');
+                setCookie('hasSigned', 'true', 365);
+            }
+            document.getElementById("popup").classList.remove('show');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Etwas ist schiefgegangen! Stelle sicher, dass du online bist.');
+        });
+    });
+});
+
+
 document.getElementById("unterschreibenButton").addEventListener("click", function() {
     // Überprüfe, ob der Benutzer bereits unterschrieben hat
     if (getCookie('hasSigned') === 'true') {
